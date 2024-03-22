@@ -22,7 +22,9 @@ function shuffle() {
     return array;
   }
 
-const doms = [["Domanda1", "risp1","risp2","risp3","risp4",2],
+
+//plz usiamo ordine umano ha più senso, si inizia da 1
+const doms = [["Domanda1", "risp1","risp2","risp3","risp4",2], 
               ["Domanda2", "risp1","risp2","risp3","risp4",3],
               ["Domanda3", "risp1","risp2","risp3","risp4",1]
              ]
@@ -30,16 +32,54 @@ const doms = [["Domanda1", "risp1","risp2","risp3","risp4",2],
 
 function randDom()
 {
-    //const doms = ["Domanda1", "Domanda2", "Domanda3"];
 
-    const domanda = getRndInteger(0,3)
+    const mainContainer = document.getElementById("mainContainer");
+    const question = mainContainer.querySelector("#questionTitle");
 
-    document.getElementById("dom").innerHTML = doms[domanda][0]
+    const questionIndex = getRndInteger(0,3);
+
+    question.innerHTML = "<h3>" + doms[questionIndex][0] + "<\h3>";
+    question.value = questionIndex;
     arr = shuffle();
-    for(var i=0; i<4; i++)
+    mainContainer.style.display = "block";
+    console.log(arr)
+    for(let i=0; i<4; i++)
     {
-        document.getElementById("ans"+i).innerHTML = doms[domanda][arr[i]]
+        mainContainer.querySelector("#ans" + (i+1)).value = arr[i];
+        mainContainer.querySelector("#ans" + (i+1) + "Label").innerHTML = doms[questionIndex][arr[i]];
     }
     
     
+}
+
+function nextQuestion()
+{
+    const scoreObj = document.getElementById("score").lastElementChild;
+
+    const mainContainer = document.getElementById("mainContainer");
+    const question = mainContainer.querySelector("#questionTitle");
+    const questionIndex = question.value;
+    for(let i=1; i<=4; i++)
+    {
+        const tempRadio = mainContainer.querySelector("#ans" + i);
+        if(tempRadio.checked && doms[questionIndex][5] == tempRadio.value)
+        {
+            scoreObj.innerHTML = parseInt(scoreObj.innerHTML)+1;
+        }
+    }
+    randDom();
+
+
+}
+
+function startSimulation()
+{
+    const scoreObj = document.getElementById("score").lastElementChild;
+    scoreObj.innerHTML = "0";
+    randDom();
+    const nextButtonObj = document.getElementById("nextButton");
+    nextButtonObj.style.display = "inline";
+    const startButtonObj = document.getElementById("startButton");
+    startButtonObj.style.display = "none";
+
 }

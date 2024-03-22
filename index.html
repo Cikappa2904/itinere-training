@@ -10,21 +10,29 @@
 <body>
     <h1>Barbanera Simulator!!!</h1>
     <section class="domanda">
-
-        <form action="">
-
-            <p id="dom"></p>
-
-            <input type="radio" name="risposte" id="risposte">
-                <option name="ans1" id="ans1"></option>
-                <option name="ans2" id="ans2"></option>
-                <option name="ans3" id="ans3"></option>
-                <option name="ans4" id="ans4"></option>
-            </input>
-        </form>
+        <div id="score">
+            <h3>Provole corrette: </h3>
+            <h3>0</h3>
+        </div>
         
 
-        <button type="button" onclick="randDom()">Try it</button>
+        <div id="mainContainer" style="display: none;">
+
+            <p id="questionTitle"></p>
+
+            <input type="radio" name="answers" id="ans1"></input>
+            <label for="ans1" id="ans1Label"></label> <br>
+            <input type="radio" name="answers" id="ans2"></input>
+            <label for="ans2" id="ans2Label"></label> <br>
+            <input type="radio" name="answers" id="ans3"></input>
+            <label for="ans3" id="ans3Label"></label> <br>
+            <input type="radio" name="answers" id="ans4"></input>
+            <label for="ans4" id="ans4Label"></label> <br>
+        </div>
+        
+
+        <button type="button" onclick="startSimulation()" id="startButton">suona la cornamusa ora</button>
+        <button type="button" onclick="nextQuestion()" style="display: none" id="nextButton">popi popi</button>
     </section>
 </body>
 </html>
